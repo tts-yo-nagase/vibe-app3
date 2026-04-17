@@ -1,0 +1,142 @@
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  margin-bottom: 32px;
+}
+
+.statsRow {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 24px;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.statValue {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+.wordBox {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px 24px;
+  font-size: 2.4rem;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.charTyped {
+  color: #4ade80;
+}
+
+.charCurrent {
+  color: #e0e0e0;
+  background: rgba(167, 139, 250, 0.3);
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+.charPending {
+  color: #6b7280;
+}
+
+.input {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1.2rem;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(167, 139, 250, 0.4);
+  border-radius: 12px;
+  color: #e0e0e0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #a78bfa;
+}
+
+.centerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0;
+}
+
+.button {
+  background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+  color: #1e1e2e;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.35);
+}
+
+.resultTitle {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.resultValue {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #a78bfa;
+}
