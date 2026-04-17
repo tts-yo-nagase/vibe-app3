@@ -68,58 +68,68 @@ export default function TypingGame() {
 
   const accuracy =
     totalKeys === 0 ? 100 : Math.round(((totalKeys - missKeys) / totalKeys) * 100);
+  const progress = Math.max(0, Math.min(1, timeLeft / GAME_DURATION));
+  const isUrgent = gameState === "playing" && timeLeft <= 5;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>タイピングゲーム</h1>
-      <p className={styles.subtitle}>
-        制限時間 {GAME_DURATION} 秒でできるだけ多くの単語をタイプしよう！
-      </p>
+      <header className={styles.header}>
+        <span className={styles.badge}>Typing Challenge</span>
+        <h1 className={styles.title}>Speed Typer</h1>
+        <p className={styles.subtitle}>
+          {GAME_DURATION} 秒間でできるだけ多くの単語をタイプしよう
+        </p>
+      </header>
 
       <div className={styles.statsRow}>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>時間</span>
+        <div className={`${styles.stat} ${isUrgent ? styles.statDanger : ""}`}>
+          <span className={styles.statLabel}>Time</span>
           <span className={styles.statValue}>{timeLeft}s</span>
         </div>
         <div className={styles.stat}>
-          <span className={styles.statLabel}>スコア</span>
+          <span className={styles.statLabel}>Score</span>
           <span className={styles.statValue}>{score}</span>
         </div>
         <div className={styles.stat}>
-          <span className={styles.statLabel}>正確率</span>
+          <span className={styles.statLabel}>Accuracy</span>
           <span className={styles.statValue}>{accuracy}%</span>
         </div>
+      </div>
+
+      <div className={styles.progressTrack}>
+        <div
+          className={styles.progressBar}
+          style={{ transform: `scaleX(${progress})` }}
+        />
       </div>
 
       {gameState === "ready" && (
         <div className={styles.centerBox}>
           <button className={styles.button} onClick={startGame}>
-            スタート
+            START
           </button>
         </div>
       )}
 
       {gameState === "playing" && (
         <>
-          <div className={styles.wordBox}>
-            {currentWord.split("").map((ch, i) => {
-              const isTyped = i < typed.length;
-              const isCurrent = i === typed.length;
-              return (
-                <span
-                  key={i}
-                  className={
-                    isTyped
-                      ? styles.charTyped
-                      : isCurrent
-                      ? styles.charCurrent
-                      : styles.charPending
-                  }
-                >
-                  {ch}
-                </span>
-              );
-            })}
+          <div className={styles.wordCard}>
+            <div className={styles.wordRow}>
+              {currentWord.split("").map((ch, i) => {
+                const isTyped = i < typed.length;
+                const isCurrent = i === typed.length;
+                const cls = isTyped
+                  ? styles.charTyped
+                  : isCurrent
+                  ? styles.charCurrent
+                  : styles.charPending;
+                return (
+                  <span key={i} className={`${styles.char} ${cls}`}>
+                    {ch}
+                  </span>
+                );
+              })}
+            </div>
           </div>
           <input
             ref={inputRef}
@@ -136,24 +146,24 @@ export default function TypingGame() {
       )}
 
       {gameState === "finished" && (
-        <div className={styles.centerBox}>
-          <h2 className={styles.resultTitle}>結果</h2>
+        <div className={styles.resultCard}>
+          <h2 className={styles.resultTitle}>RESULT</h2>
           <div className={styles.resultGrid}>
-            <div>
-              <div className={styles.statLabel}>スコア</div>
-              <div className={styles.resultValue}>{score}</div>
+            <div className={styles.resultStat}>
+              <span className={styles.statLabel}>Score</span>
+              <span className={styles.resultValue}>{score}</span>
             </div>
-            <div>
-              <div className={styles.statLabel}>正確率</div>
-              <div className={styles.resultValue}>{accuracy}%</div>
+            <div className={styles.resultStat}>
+              <span className={styles.statLabel}>Accuracy</span>
+              <span className={styles.resultValue}>{accuracy}%</span>
             </div>
-            <div>
-              <div className={styles.statLabel}>打鍵数</div>
-              <div className={styles.resultValue}>{totalKeys}</div>
+            <div className={styles.resultStat}>
+              <span className={styles.statLabel}>Keys</span>
+              <span className={styles.resultValue}>{totalKeys}</span>
             </div>
           </div>
           <button className={styles.button} onClick={startGame}>
-            もう一度
+            REPLAY
           </button>
         </div>
       )}
